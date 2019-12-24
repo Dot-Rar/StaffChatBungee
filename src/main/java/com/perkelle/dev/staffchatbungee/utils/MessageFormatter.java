@@ -21,4 +21,11 @@ public class MessageFormatter {
 
         return  message;
     }
+
+    public static String formatCommandResponse(String configKey) {
+        String prefix = ConfigManager.getConfig().getString("lang.prefix", "&8[&4StaffChat&8] &f");
+        String message = ConfigManager.getConfig().getString(configKey);
+
+        return translateColour(prefix + message);
+    }
 }

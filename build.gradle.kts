@@ -1,5 +1,18 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath("com.github.jengelman.gradle.plugins:shadow:5.2.0")
+    }
+}
+
 plugins {
     java
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group = "com.perkelle.dev.staffchatbungee"
@@ -17,4 +30,10 @@ dependencies {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType<ShadowJar> {
+    baseName = "app"
+    classifier = ""
+    version = ""
 }

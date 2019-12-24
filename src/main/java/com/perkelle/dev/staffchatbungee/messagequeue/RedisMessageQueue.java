@@ -61,7 +61,7 @@ public class RedisMessageQueue implements IMessageQueue {
             String message = MessageFormatter.formatStaffChatMessage(placeholders);
 
             ProxyServer.getInstance().getPlayers().stream()
-                    .filter(p -> p.hasPermission("staffchat.receive") || p.hasPermission("staffchat.*"))
+                    .filter(p -> p.hasPermission("staffchat.use"))
                     .forEach(p -> p.sendMessage(TextComponent.fromLegacyText(message)));
         };
     }

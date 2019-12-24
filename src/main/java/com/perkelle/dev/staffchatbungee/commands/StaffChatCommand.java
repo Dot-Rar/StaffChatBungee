@@ -1,16 +1,19 @@
 package com.perkelle.dev.staffchatbungee.commands;
 
+import com.google.common.base.Strings;
 import com.perkelle.dev.staffchatbungee.ChatMode;
+import com.perkelle.dev.staffchatbungee.messagequeue.MessageQueue;
+import com.perkelle.dev.staffchatbungee.messagequeue.StaffChatMessage;
 import com.perkelle.dev.staffchatbungee.utils.MessageFormatter;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class StaffChatToggleCommand extends Command {
+public class StaffChatCommand extends Command {
 
-    public StaffChatToggleCommand() {
-        super("sctoggle", "", "staffchattoggle");
+    public StaffChatCommand() {
+        super("staffchat", "", "sc");
     }
 
     @Override
@@ -27,13 +30,7 @@ public class StaffChatToggleCommand extends Command {
             return;
         }
 
-        boolean isInStaffChat = ChatMode.INSTANCE.isInStaffChat(p);
-        ChatMode.INSTANCE.setInStaffChat(p, !isInStaffChat);
-
-        if(isInStaffChat) {
-            sender.sendMessage(TextComponent.fromLegacyText(MessageFormatter.formatCommandResponse("lang.channel-off")));
-        } else {
-            sender.sendMessage(TextComponent.fromLegacyText(MessageFormatter.formatCommandResponse("lang.channel-on")));
-        }
+        StaffChatMessage message = new StaffChatMessage(p.getName(), p.getServer().getInfo().getName(), String.join(" ", args));
+        MessageQueue.INSTANCE.getMessageQueue().publishMessage(message);
     }
 }

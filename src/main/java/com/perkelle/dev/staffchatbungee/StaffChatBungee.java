@@ -1,5 +1,8 @@
 package com.perkelle.dev.staffchatbungee;
 
+import com.perkelle.dev.staffchatbungee.commands.StaffChatCommand;
+import com.perkelle.dev.staffchatbungee.commands.StaffChatToggleCommand;
+import com.perkelle.dev.staffchatbungee.listeners.ChatListener;
 import com.perkelle.dev.staffchatbungee.messagequeue.IMessageQueue;
 import com.perkelle.dev.staffchatbungee.messagequeue.LocalMessageQueue;
 import com.perkelle.dev.staffchatbungee.messagequeue.MessageQueue;
@@ -49,5 +52,10 @@ public class StaffChatBungee extends Plugin  {
         messageQueue.connect();
 
         // Register commands
+        getProxy().getPluginManager().registerCommand(this, new StaffChatCommand());
+        getProxy().getPluginManager().registerCommand(this, new StaffChatToggleCommand());
+
+        // Register listeners
+        getProxy().getPluginManager().registerListener(this, new ChatListener());
     }
 }
