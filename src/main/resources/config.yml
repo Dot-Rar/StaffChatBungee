@@ -1,0 +1,15 @@
+lang:
+  message-format: '&8[&4StaffChat: %server%&8] &f%player%: %message%'
+
+  prefix: '&8[&4StaffChat&8] &f'
+  no-permission: 'You are missing the permission %permission%'
+  missing-message: 'You must specify a message to send to staff chat'
+  channel-on: 'You have enabled staff chat mode'
+  channel-off: 'You have disabled staff chat mode'
+
+# Use if you want multi-proxy support
+redis:
+  enable: false
+  host: 127.0.0.1
+  port: 6379
+  password: changeme
