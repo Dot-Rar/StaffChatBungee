@@ -30,6 +30,11 @@ public class StaffChatCommand extends Command {
             return;
         }
 
+        if(args.length == 0) {
+            sender.sendMessage(TextComponent.fromLegacyText(MessageFormatter.formatCommandResponse("lang.missing-message")));
+            return;
+        }
+
         StaffChatMessage message = new StaffChatMessage(p.getName(), p.getServer().getInfo().getName(), String.join(" ", args));
         MessageQueue.INSTANCE.getMessageQueue().publishMessage(message);
     }

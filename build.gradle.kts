@@ -33,7 +33,17 @@ configure<JavaPluginConvention> {
 }
 
 tasks.withType<ShadowJar> {
-    baseName = "app"
+    baseName = rootProject.name
     classifier = ""
-    version = ""
+    version = version
+
+    val packages = listOf(
+            "org.apache",
+            "org.slf4j",
+            "redis"
+    )
+
+    packages.forEach {
+        relocate(it, "com.perkelle.dev.staffchatbungee.dependencies.$it")
+    }
 }

@@ -30,7 +30,12 @@ public class RedisMessageQueue implements IMessageQueue {
         String host = ConfigManager.getConfig().getString("redis.host", "127.0.0.1");
         int port = ConfigManager.getConfig().getInt("redis.port", 6379);
         String password = ConfigManager.getConfig().getString("redis.password");
-        pool = new JedisPool(config, host, port, Protocol.DEFAULT_TIMEOUT, password);
+
+        if(password == null || password.isEmpty()) {
+            pool = new JedisPool(config, host, port);
+        } else {
+            pool = new JedisPool(config, host, port, Protocol.DEFAULT_TIMEOUT, password);
+        }
 
         subscribe();
     }
